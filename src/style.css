@@ -1,0 +1,172 @@
+/* @import url('https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap'); */
+@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 1em;
+}
+
+nav,
+header,
+main {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/*********************/
+/* utility & main classes */
+
+.black_cl {
+  color: rgba(24, 31, 37, 1);
+}
+.bolder {
+  font-weight: bolder;
+}
+.light_font {
+  color: rgb(202, 202, 202);
+}
+.main_cl {
+  color: rgb(86, 210, 216);
+}
+.fl {
+  float: left;
+}
+.mb-10 {
+  margin-bottom: 10px;
+}
+.fd-col {
+  flex-direction: column;
+}
+
+/********************************/
+/* Navigaatio alueen tyylittely */
+
+nav {
+  background-color: white;
+  color: #fff;
+  padding: 0.5rem 4rem;
+  font-weight: 100;
+  font-size: 1.2em;
+  background-color: rgb(30, 39, 46);
+  box-shadow: 0 8px 16px -6px black;
+  height: 100px;
+}
+nav ul {
+  padding-top: 29px;
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Logon erityis liukuväri */
+
+nav ul li:first-child a {
+  /* Fallback: Set a background color. */
+  background-color: rgb(65 77 159);
+
+  /* Create the gradient. */
+  /* background-image: linear-gradient(45deg, #f3ec78, #af4261);*/
+  background-image: linear-gradient(45deg, rgb(86, 210, 216), rgb(65 77 159));
+
+  /* Set the background size and repeat properties. */
+  background-size: 100%;
+  background-repeat: repeat;
+
+  /* Use the text as a mask for the background. */
+  /* This will show the gradient as a text color rather than element bg. */
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  font-size: larger;
+  font-family: "Roboto Slab", serif;
+  font-weight: 900;
+  margin-right: 40px;
+}
+
+nav ul a {
+  color: rgb(197, 197, 197);
+  padding: 0.6rem;
+  margin: 0 0.25em;
+  font-size: smaller;
+  transition: color 0.5s;
+}
+
+nav ul li {
+  float: left;
+}
+nav ul li a:hover {
+  color: rgb(206, 255, 149);
+}
+
+.selected {
+  border-bottom: 1px solid var(rgb(86, 210, 216));
+  color: var(rgb(86, 210, 216));
+}
+
+/*********************/
+/* Infoalueen tyylittely */
+
+.info-area {
+  margin-top: 50px;
+}
+
+#info-text {
+  text-align: center;
+  /* This way the text wont wrap */
+  font-size: 1.5em;
+}
+
+/*********************/
+/* About osion tyylittely */
+
+.about-us {
+  min-height: 400px;
+  background-color: #f0f0f0;
+  background-image: url("../images/pexels-lukas-crop.jpg");
+  background-position: right;
+  background-size: cover;
+  padding: 80px;
+  padding-right: 30%;
+  color: black;
+  position: relative;
+  margin-top: 50px;
+}
+.about-us p {
+  margin-bottom: 15px;
+}
+.card-inside {
+  margin-right: 50px;
+  margin-bottom: 30px;
+  max-width: 330px;
+  border-radius: 20px;
+}
+
+/*********************/
+/* Footer osion tyylittely */
+
+footer {
+  width: 100%;
+  text-align: center;
+  padding-top: 40px;
+  background-color: rgb(117, 11, 44);
+  filter: brightness(40%);
+  height: 100px;
+  margin-top: 50px;
+  color: #fefefe;
+}
