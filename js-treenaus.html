@@ -36,7 +36,7 @@
     </style>
   </head>
 
-  <body>
+  <body style="background-color: rgb(255, 255, 255)">
     <main>
       <h1>Javascript harjoittelu</h1>
 
@@ -216,10 +216,23 @@
         // JS funktiot
 
         // perinteinen funktiomäärittely
+        function greet(name) {
+          console.log(`Moikka ${name}!!!!!`);
+        }
 
         // function expression. Funtio joka on anonyymi mutta tallennetaan muuttujaan
+        const greet2 = function (name) {
+          console.log(`Moikka ${name}!!!!!`);
+        };
 
         // arrow funktio / nuolifunktio, edellistä yksikertaisempi ja lyhyempi
+        const greet3 = (name) => {
+          console.log(`Moikka ${name}!!!!!`);
+        };
+
+        greet2('Matti');
+        greet3('Tiina');
+        greet('Ulla');
       </script>
 
       <p>2. Lisätään nappuloille kuuntelijat</p>
@@ -229,8 +242,42 @@
 
       <script>
         // Etsitään molemmat nappulat DOMista ja tallennetaan muuttujaan
+        let btn = document.querySelector('#btn');
+        let btn2 = document.querySelector('#btn2');
 
-        // Funktio: vaihtaa taustavärin kahden vaihtoehdon välillä
+        // Funktio: vaihtaa taustavärin kahden vaihtoehdon välillä V1
+        function toggleBackground(evt) {
+          console.log(evt);
+          let currentColor = document.body.style.backgroundColor;
+          //let currentColor = getComputedStyle(document.body).backgroundColor;
+          console.log('Taustaväri:', currentColor);
+
+          if (currentColor == 'rgb(255, 255, 255)') {
+            console.log('Se on valkoinen, vaihdetaan pinkiksi!');
+            document.body.style.backgroundColor = 'rgb(255,182,190)';
+          } else {
+            console.log('Vaihdetaan takaisin valkoiseksi!!');
+            document.body.style.backgroundColor = 'rgb(255,255,255)';
+          }
+        }
+
+        function toggleBackground2() {
+          //  tulos = ika >= 18 ? 'Aikuinen' : 'Lapsi';
+
+          let currentColor = document.body.style.backgroundColor;
+
+          document.body.style.backgroundColor =
+            currentColor === 'rgb(255, 255, 255)'
+              ? 'rgb(255,182,190)'
+              : 'rgb(255,255,255)';
+        }
+
+        btn.addEventListener('click', toggleBackground2);
+
+        btn2.addEventListener('click', () => {
+          console.log('Klikkasin nappulaa');
+          window.open('https://www.w3schools.com/js/js_arrow_function.asp');
+        });
 
         // Funktio: avataan uusi ikkuna
       </script>
@@ -241,6 +288,21 @@
 
       <script>
         // Mitä kolmesta hiiren nappulasta painettiin? Tutkitaan mousedown eventtiä.
+        let bt3 = document.querySelector('#btn3');
+
+        bt3.addEventListener('mousedown', (event) => {
+          console.log(event);
+
+          if (event.button == 0) {
+            console.log('Left button');
+          } else if (event.button == 1) {
+            console.log('Middle button');
+          } else if (event.button == 2) {
+            console.log('Right button');
+          } else {
+            console.log('Virhe');
+          }
+        });
       </script>
 
       <p>4. Key events / Näppäimistön painikkeiden eventit</p>
@@ -249,6 +311,17 @@
 
       <script>
         // Näppäimistön eventit
+        window.addEventListener('keydown', (event) => {
+          if (event.key == 'v') {
+            document.body.style.background = 'violet';
+          }
+        });
+
+        window.addEventListener('keyup', (event) => {
+          if (event.key == 'v') {
+            document.body.style.background = '';
+          }
+        });
       </script>
 
       <h3>Prevent Default / Estä perus käyttäytyminen</h3>
@@ -257,6 +330,11 @@
 
       <script>
         // Estetään linkin normaali toiminta
+        let link = document.querySelector('#link');
+        link.addEventListener('click', (event) => {
+          console.log('NOPE ei onnistu!!!!');
+          event.preventDefault();
+        });
       </script>
 
       <h3>Prevent Default / Estä perus käyttäytyminen FORMeissa</h3>
@@ -269,15 +347,60 @@
 
       <form action="">
         <label for="fname">Etunimi:</label>
-        <input type="text" id="fname" name="fname" value="John" />
+        <input type="text" id="fname" name="fname" value="Ulla" />
         <label for="lname">Sukunimi:</label>
-        <input type="text" id="lname" name="lname" value="Doe" />
+        <input type="text" id="lname" name="lname" value="Sederlöf" />
         <input type="submit" value="Submit" />
       </form>
 
       <script>
         // Estetään formin normaalitoiminta ja pomitaan arvot formista JSn avulla jatkokäsittelyä varten
+        let form = document.querySelector('form');
+        form.addEventListener('submit', (event) => {
+          console.log('Ei onnistu formin lähettäminen!!!!');
+
+          // estää formin lähettämisen
+          event.preventDefault();
+          const firstName = document.getElementById('fname').value;
+          const lastName = document.getElementById('lname').value;
+
+          // Tässä välissä lähetämme backendille nämä tiedot
+
+          console.log(`Etunimi: ${firstName} ja Sukunimi: ${lastName}`);
+
+          // Vaihtoehto palauttaa true/false
+          let choice = confirm(
+            `Onko nämä tiedot oikein: ${firstName} ${lastName} `
+          );
+          console.log(choice);
+
+          // Kysytään tietoa
+          let name = prompt('Mikä on sinun nimi');
+          console.log(name);
+        });
       </script>
     </main>
+
+    <script>
+      // Yleiset testit
+      // ehto ? arvoJosTosi : arvoJosEpätosi
+      let ika = 8;
+      let tulos = '';
+
+      // if (ika >= 18) {
+      //   tulos = 'Aikuinen';
+      // } else {
+      //   tulos = 'Lapsi';
+      // }
+
+      tulos = ika >= 18 ? 'Aikuinen' : 'Lapsi';
+
+      console.log(tulos);
+
+      window.addEventListener('scroll', () => {
+        let top = pageYOffset;
+        console.log(top);
+      });
+    </script>
   </body>
 </html>
