@@ -39,17 +39,56 @@
           <a href="#" class="navlink selected">BMI laskuri</a>
         </li>
         <li>
-          <a href="rajapinnat.html" class="navlink">Rajapintahaut</a>
+          <a href="viikkotehtavat.html" class="navlink">Viikkotehtävät</a>
         </li>
       </ul>
       <span class="header-links"></span>
     </nav>
 
     <main>
-      <section>
-        <h3>BMI Sivusto</h3>
-      </section>
+      <div class="card">
+        <img src="/images/bmi.jpeg" alt="BMI Index chart" style="width: 100%" />
+        <h2>Painoindeksilaskuri / BMI-laskuri</h2>
+        <p class="description">
+          Painoindeksilaskurilla voit laskea pituuden ja painon perustella
+          painoindeksin (BMI, Body Mass Index).
+        </p>
+
+        <form action="">
+          <label for="weight">Anna painosi:</label>
+          <input type="text" id="weight" name="weight" placeholder="kg" />
+          <label for="height">Anna pituutesi:</label>
+          <input type="text" id="height" name="height" placeholder="cm" />
+          <button type="submit" class="btn calculate">Laske indeksi</button>
+        </form>
+
+        <section class="bmi-table">
+          <p>Mittaustuloksesi: <span class="bmi-score">0</span></p>
+
+          <table id="bmiTbl" class="table table-bordered">
+            <tbody>
+              <tr class="bmi0-19">
+                <td>Alipaino</td>
+                <td>0 - 18.9</td>
+              </tr>
+              <tr class="bmi19-25">
+                <td>Normaali paino</td>
+                <td>19 - 24.9</td>
+              </tr>
+              <tr class="bmi25-30">
+                <td>Ylipaino</td>
+                <td>25.0 - 40.0 tai enemmän</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>
+            〽️ Analyysi:
+            <span class="analysis">Tähän saat analyysin BMI tuloksestasi</span>
+          </p>
+        </section>
+      </div>
     </main>
   </body>
-  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/js/bmi.js"></script>
 </html>
