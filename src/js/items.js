@@ -25,6 +25,7 @@ const renderFruitList = (items) => {
 /////////////////////
 
 const getItems = async () => {
+  //  const items = await fetchData(url, options);
   const items = await fetchData('http://localhost:3000/api/items');
 
   // jos BE puolelta tulee virhe niin informoidaan
@@ -43,4 +44,37 @@ const getItems = async () => {
   renderFruitList(items);
 };
 
-export { getItems };
+// GEt item by ID
+/////////////////////
+
+const getItemById = async (event) => {
+  console.log('Haetaan IDn avulla!!!');
+
+  event.preventDefault();
+
+  //const idInput = document.getElementById('itemID');
+  const idInput = document.querySelector('#itemId');
+  const itemId = idInput.value;
+  console.log(itemId);
+
+  const url = `http://localhost:3000/api/items/${itemId}`;
+
+  const options = {
+    method: 'GET',
+  };
+
+  const item = await fetchData(url, options);
+
+  // jos BE puolelta tulee virhe niin informoidaan
+  // joko consoleen tai käyttäjälle virheestä
+
+  if (item.error) {
+    console.log(item.error);
+    return;
+  }
+
+  console.log(item);
+  alert(`Item found :) ${item.name}`);
+};
+
+export { getItems, getItemById };
