@@ -1,0 +1,28 @@
+*:focus {
+  /* outline: 5px dotted pink; */
+}
+
+.registerForm input {
+  padding: 10px;
+  border-left: 10px solid;
+  transition: border-color 1s ease-out;
+}
+
+p::first-letter {
+  font-size: 40px;
+}
+
+::placeholder {
+  /* color: blue;
+  font-weight: 800; */
+}
+input:focus,
+textarea:focus {
+  background-color: azure;
+}
+.registerForm input:valid {
+  border-left-color: #64f264;
+}
+.registerForm input:invalid {
+  border-left-color: #eb451b;
+}

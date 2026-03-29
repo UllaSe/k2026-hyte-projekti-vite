@@ -1,4 +1,5 @@
 import '../css/api.css';
+import '../css/forms.css';
 import { fetchData } from './fetch.js';
 
 console.log('Moi luodaan nyt tokeneita ja kirjaudutaan sisään');
