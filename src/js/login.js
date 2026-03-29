@@ -1,5 +1,5 @@
 import '../css/api.css';
-import '../css/forms.css';
+// import '../css/forms.css';
 import { fetchData } from './fetch.js';
 
 console.log('Moi luodaan nyt tokeneita ja kirjaudutaan sisään');
@@ -94,7 +94,8 @@ const loginUser = async (event) => {
   if (response.message) {
     console.log(response.message, 'success');
     localStorage.setItem('token', response.token);
-    localStorage.setItem('name', response.user.username);
+    //localStorage.setItem('name', response.user.username);
+    localStorage.setItem('name', response.user.given_name);
     logResponse(
       'loginResponse',
       `localStorage set with token value: ${response.token}`
