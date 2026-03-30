@@ -153,7 +153,7 @@ const drawChart = (userData) => {
   });
 };
 
-const drawAMChart = () => {
+const drawAMChart = (formattedData) => {
   // Lets look at a example from
   // https://www.amcharts.com/demos/line-graph/
   // Documentation
@@ -216,13 +216,27 @@ const drawAMChart = () => {
 
     // Add series
     // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
-    var series = chart.series.push(
+    var readinesSeries = chart.series.push(
       am5xy.LineSeries.new(root, {
         name: 'Readiness',
         xAxis: xAxis,
         yAxis: yAxis,
-        valueYField: 'value',
+        valueYField: 'readiness',
         valueXField: 'date',
+        tooltip: am5.Tooltip.new(root, {
+          labelText: '{valueY}',
+        }),
+      })
+    );
+
+    var stressSeries = chart.series.push(
+      am5xy.LineSeries.new(root, {
+        name: 'Stress',
+        xAxis: xAxis,
+        yAxis: yAxis,
+        valueYField: 'stress_index',
+        valueXField: 'date',
+        stroke: am5.color(0xff0000),
         tooltip: am5.Tooltip.new(root, {
           labelText: '{valueY}',
         }),
@@ -238,13 +252,22 @@ const drawAMChart = () => {
       })
     );
 
-    // Set data
-    var data = generateDatas(1200);
-    series.data.setAll(data);
+    // Kun käytämme AM chartia se tarvitsee ajan millisekunteina
+    console.log(formattedData);
+
+    const data = formattedData.map((entry) => ({
+      date: entry.timestamp,
+      readiness: entry.readiness,
+      stress_index: entry.stressIndex,
+    }));
+
+    readinesSeries.data.setAll(data);
+    stressSeries.data.setAll(data);
 
     // Make stuff animate on load
     // https://www.amcharts.com/docs/v5/concepts/animations/
-    series.appear(1000);
+    readinesSeries.appear(1000);
+    stressSeries.appear(1500);
     chart.appear(1000, 100);
   }); // end am5.ready()
 };
