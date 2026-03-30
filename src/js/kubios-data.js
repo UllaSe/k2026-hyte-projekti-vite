@@ -39,10 +39,9 @@ const getUserData = async () => {
     console.log('Käyttäjän tietojen haku Kubioksesta epäonnistui');
     return;
   }
-  console.log(userData);
 
   // Draw chart with chart.js
-  // drawChart(formattedData);
+  drawChart(userData);
   // Draw chart with amcharts
   // drawAMChart(formattedData);
 };
@@ -54,10 +53,76 @@ const getUserData = async () => {
 const formatKubiosResults = (userData) => {};
 
 // Let us try these together
-const drawChart = () => {
+const drawChart = (userData) => {
   // Create the chart
   // https://www.chartjs.org/docs/latest/charts/line.html
   // https://www.chartjs.org/docs/latest/samples/line/line.html
+
+  console.log(userData);
+
+  // .map kertaus
+  const numerot = [1, 2, 3];
+  const tuplattu = numerot.map((alkio) => {
+    return alkio * 2;
+  });
+
+  console.log(numerot, tuplattu);
+
+  // Muodostetaan erilliset taulukot chat.js:sää varten
+  // haetaan käyttämällä map metodia vain kaikki readiness arvot
+  const readiness = userData.results.map((rivi) => rivi.result.readiness);
+
+  //
+  const formatter = new Intl.DateTimeFormat('fi-FI', {
+    day: 'numeric',
+    month: 'long',
+  });
+
+  // Hakekaan otsikoksi päivämäärä
+  // const labels = userData.results.map((rivi) => rivi.daily_result);
+  const labels = userData.results.map((rivi) =>
+    formatter.format(new Date(rivi.daily_result))
+  );
+  // Hakekaa stressIndex tiedot
+  const stressIndex = userData.results.map((rivi) => rivi.result.stress_index);
+
+  console.log('Labels', labels);
+  console.log('Readiness', readiness);
+  console.log('Stress Index', stressIndex);
+
+  const ctx = document.getElementById('jsChart');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Readiness',
+          data: readiness,
+          borderWidth: 1,
+          borderColor: 'red',
+        },
+        {
+          label: 'Stress Index',
+          data: stressIndex,
+          borderWidth: 1,
+          borderColor: 'blue',
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Readiness / Stress',
+          },
+        },
+      },
+    },
+  });
 };
 
 const drawAMChart = () => {
